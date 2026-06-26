@@ -1,0 +1,15 @@
+# Machine-specific runtime state (do not publish)
+progress.csv
+pid.txt
+*.log
+
+# Exported certificate bundle — may contain private/corporate root CAs. NEVER commit.
+winca.pem
+
+# Scratch / test scripts
+_t*.py
+
+# Python
+__pycache__/
+*.pyc
+tmp/
