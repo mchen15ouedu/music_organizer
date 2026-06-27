@@ -1,5 +1,6 @@
 # Machine-specific runtime state (do not publish)
 progress.csv
+progress_v2.csv
 pid.txt
 *.log
 
