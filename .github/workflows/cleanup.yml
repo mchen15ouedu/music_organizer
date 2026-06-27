@@ -1,0 +1,25 @@
+name: Clean stem-worker storage
+
+# Bi-weekly: 03:00 UTC on the 1st and 15th of each month (~every two weeks).
+# Also runnable on demand from the Actions tab.
+on:
+  schedule:
+    - cron: "0 3 1,15 * *"
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install huggingface_hub
+        run: pip install --quiet "huggingface_hub>=0.23"
+      - name: Delete runs older than the retention window
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          STORAGE_DATASET: vincewin/stem-worker-data
+          RETENTION_DAYS: "14"
+        run: python cleanup_storage.py
